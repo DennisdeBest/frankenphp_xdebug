@@ -15,3 +15,5 @@ Thread 24 "thpool-4" received signal SIG35, Real-time event 35.
 [Switching to LWP 58]
 0x000075aee716ce63 in zif_xdebug_error_reporting () from /usr/local/lib/php/extensions/no-debug-zts-20230831/xdebug.so
 Continuing.
+[New LWP 139]
+[New LWP 161]
