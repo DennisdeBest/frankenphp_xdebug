@@ -1,0 +1,28 @@
+liip_imagine:
+    driver: "gd"
+
+    webp:
+        generate: true
+        quality: 100
+        cache: default
+        data_loader: default
+        post_processors: [ ]
+
+
+    loaders:
+        default:
+            filesystem:
+                data_root:
+                    - "%kernel.project_dir%/public"
+
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: media/cache
+
+    filter_sets:
+        logo:
+            quality: 100
+            filters:
+                thumbnail: { size: [ 48, 48 ], mode: inset }
