@@ -17,3 +17,8 @@ Thread 24 "thpool-4" received signal SIG35, Real-time event 35.
 Continuing.
 [New LWP 139]
 [New LWP 161]
+
+Thread 1 "frankenphp" received signal SIGTERM, Terminated.
+[Switching to LWP 1]
+0x00000000004795e3 in ?? ()
+Continuing.

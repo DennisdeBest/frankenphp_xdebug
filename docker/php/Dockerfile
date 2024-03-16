@@ -1,6 +1,6 @@
 #syntax=docker/dockerfile:1.4
 
-FROM dunglas/frankenphp:1.1.0-alpine AS frankenphp_upstream
+FROM dunglas/frankenphp:1.1-php8.2.16-alpine AS frankenphp_upstream
 FROM composer/composer:2-bin AS composer_upstream
 FROM node:20-alpine AS node
 
@@ -53,21 +53,17 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN apk add --no-cache gdb
 
-RUN set -eux; \
-	install-php-extensions \
-		xdebug \
-	;
-
 COPY --link docker/php/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
-ARG PHP_CS_FIXER_VERSION=v3.51.0
+# Install Pickle
+RUN curl -sS https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar --output /usr/bin/pickle && \
+    chmod +x /usr/bin/pickle
 
-RUN wget "https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/$PHP_CS_FIXER_VERSION/php-cs-fixer.phar" -O php-cs-fixer && \
-    chmod a+x php-cs-fixer && \
-    mv php-cs-fixer /usr/local/bin/php-cs-fixer
+ENV XDEBUG_VERSION=3.3.1
+
+RUN install-php-extensions xdebug-${XDEBUG_VERSION}
 
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
-
 
 FROM frankenphp_base AS composer_install
 

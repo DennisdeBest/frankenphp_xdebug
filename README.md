@@ -25,3 +25,25 @@ set logging enabled on
 ```
 
 Then press `c` until the page is rendered (or atleast partially). This will create a `gdb.txt` file at the root of the project. 
+
+## Xdebug versions
+
+To change the Xdebug version modify `ENV XDEBUG_VERSION=3.2.1` in the [Dockerfile](./docker/php/Dockerfile).
+
+## PHP versions
+
+Using the alpine FrankenPHP image it can be changed from PHP8.3.3 to PHP 8.2.16 By changing 
+
+```shell
+FROM dunglas/frankenphp:1.1.0-alpine AS frankenphp_upstream
+```
+
+into 
+
+```shell
+FROM dunglas/frankenphp:1.1-php8.2.16-alpine AS frankenphp_upstream
+```
+
+The problem seems to only be for php 8.3.3
+
+
