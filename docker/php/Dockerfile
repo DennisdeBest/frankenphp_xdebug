@@ -26,7 +26,6 @@ RUN set -eux; \
 		gd \
 		xsl \
 		zip \
-    pdo_mysql \
 	;
 
 COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
